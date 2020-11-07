@@ -2,14 +2,15 @@
 #env FLASK_APP=flask/main.py flask run
 
 from flask import Flask, escape, request, render_template, send_from_directory
+from flask_cors import CORS, cross_origin
 import json, requests
 
 app = Flask(__name__,
             static_folder = "./static",
             template_folder = "./static")
 
-#cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
-
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/js/<path:path>')
