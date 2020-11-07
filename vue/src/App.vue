@@ -1,20 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Breadcrumbs</h1>
+    <Map msg="Welcome to Your Vue.js App"/>
+    <div class="notification">
+  <button class="delete"></button>
+  Lorem ipsum dolor sit amet, consectetur
+  adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Sit amet,
+  consectetur adipiscing elit
+</div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Map from './components/Map.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Map
   }
 }
 </script>
+
 
 <style>
 #app {
