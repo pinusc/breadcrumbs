@@ -4,6 +4,8 @@ venv/
 node_modules
 /dist
 
+vue/dist/*
+
 
 # local env files
 .env.local

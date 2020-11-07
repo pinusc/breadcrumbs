@@ -1,16 +1,28 @@
 #export FLASK_DEBUG=1
 #env FLASK_APP=flask/main.py flask run
 
-from flask import Flask, escape, request
+from flask import Flask, escape, request, render_template, send_from_directory
 import json, requests
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_folder = "./static",
+            template_folder = "./static")
 
-@app.route('/')
-def hello():
-    name = request.args.get("name", "World")
-    return f'Hello, {escape(name)}!'
+#cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
+
+
+@app.route('/js/<path:path>')
+def send_js(path):
+    print(path)
+    return send_from_directory('static/js', path)
+
+@app.route('/css/<path:path>')
+def send_css(path):
+    print(path)
+    return send_from_directory('static/css', path)
+
+    
 @app.route("/api/otm")
 def api_venues_otm():
     lat = request.args.get('lat')
@@ -28,6 +40,10 @@ def api_venues():
     data = get_venues_from_4S(lat, lon)
 
     return json.dumps(data)
+
+@app.route('/')
+def serve_index():
+    return render_template("index.html")
 
 def get_venues_from_OTM(lat, lon):
     #radius=10000&lon=0.00001&lat=51.500944&kinds=interesting_places&format=json&apikey=5ae2e3f221c38a28845f05b677a3c8a48be4b3462eb96b2ca683d48c
