@@ -28,8 +28,15 @@ def send_css(path):
 def api_venues_otm():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
-    radius = request.args.get('radius')
-    categories = request.args.get('categories')
+    if "radius" in request.args:
+        radius = request.args.get('radius')
+    else:
+        radius = 3500
+    
+    if "categories" in request.args:
+        categories = request.args.get('categories')
+    else:
+        categories = "interesting_places"
 
     data = get_venues_from_OTM(lat,lon, radius, categories)
 
