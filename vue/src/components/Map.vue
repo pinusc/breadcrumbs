@@ -4,10 +4,10 @@
 
 <template>
   <div id="mapview">
-  <button v-on:click="initmap"> init </button>
-  <h1 v-on:click="ajaxm">map</h1>
+  <button v-on:click="ajaxm"> Get Locations </button>
+  <h1>map</h1>
     <p>{{ msg }}</p>
-    <div id="mapid"></div>
+    <div v-on:load="initmap" id="mapid"></div>
   </div>
 </template>
 
@@ -18,8 +18,30 @@ export default {
     msg: String,
   },
   methods:{
-    initmap () { 
-        // var mymap = L.map('mapid').setView([51.505, -0.09], 13)
+    async ajaxm () {
+      const { data } = await this.$http.get(
+              'http://localhost:5000/api/otm', {
+                params: {
+                    lat: 51.500944,
+                    lon: 0.124618,
+                    radius: 5000
+                }
+              }
+      );
+      for (var i = 0; i < data.length; i++) {
+        var point = [data[i].point.lat, data[i].point.lon]
+        console.log(point)
+        this.$L.marker(point).addTo(this.mymap);
+      }
+      console.log(data);
+      // example response: { id: 1, name: "something" }
+    }
+  },
+  mounted: function() {
+    // var mymap = L.map('mapid').setView([51.505, -0.09], 13)
+    this.$nextTick(function () {
+    // Code that will run only after the
+    // entire view has been rendered
         var mymap = this.$L.map('mapid').setView([51.500944, 0.124618], 13);
         this.$L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -30,19 +52,7 @@ export default {
             accessToken: 'pk.eyJ1IjoicGludXNjIiwiYSI6ImNraDgyNjRrejA1ZGEycnFpZXU5dTJqMjkifQ.RyyPpqxIelqUtOiWdn4efg'
         }).addTo(mymap);
         this.mymap = mymap;
-    },
-    async ajaxm () {
-      const { data } = await this.$http.get(
-              'http://localhost:5000/api/otm?lat=51.500944&lon=0.124618', 
-      );
-      for (var i = 0; i < data.length; i++) {
-        var point = [data[i].point.lat, data[i].point.lon]
-        console.log(point)
-        this.$L.marker(point).addTo(this.mymap);
-      }
-      console.log(data);
-      // example response: { id: 1, name: "something" }
-    }
+    })
   }
 }
 </script>
