@@ -48,7 +48,7 @@ def api_venues():
 def serve_index():
     return render_template("index.html")
 
-def get_venues_from_OTM(lat, lon, radius, categories):
+def get_venues_from_OTM(lat, lon, radius=3500, categories="interesting_places"):
     #radius=10000&lon=0.00001&lat=51.500944&kinds=interesting_places&format=json&apikey=5ae2e3f221c38a28845f05b677a3c8a48be4b3462eb96b2ca683d48c
 
     url = 'https://api.opentripmap.com/0.1/en/places/radius'
