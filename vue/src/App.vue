@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h1>Breadcrumbs</h1>
+    <LocationManager />
     <Map msg="Welcome to Your Vue.js App"/>
     <div class="notification">
   <button class="delete"></button>
@@ -13,11 +14,13 @@
 
 <script>
 import Map from './components/Map.vue'
+import LocationManager from './components/LocationManager.vue'
 
 export default {
   name: 'App',
   components: {
-    Map
+    Map,
+    LocationManager
   }
 }
 </script>
