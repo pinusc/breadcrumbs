@@ -12,7 +12,8 @@ var store = {
     state: {
         message: 'Hello!',
         userLocation: null,
-        finalDestinationLocation: null
+        finalDestinationLocation: null,
+        venue_detail: {}
     }
 }
 
