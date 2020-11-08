@@ -67,10 +67,6 @@ def api_venues():
 
     return json.dumps(data)
 
-@app.route('/')
-def serve_index():
-    return render_template("index.html")
-
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_index(path):
