@@ -22,6 +22,7 @@ export default {
   },
   props: {
     msg: String,
+    isChoosingLocation: Boolean
   },
   computed: {
     user_lat: function(){
@@ -47,33 +48,39 @@ export default {
         this.mymap = mymap;
         var userlocation = this.$L.circle([this.user_lat, this.user_lon], {radius: 50}).addTo(mymap);
         userlocation.setStyle({color: "#FF0000"});
-
-
-        var userMarker = this.$L.marker({lat:this.user_lat, lng:this.user_lon});
-        userMarker.addTo(this.mymap);
-        this.destination = {
-            lat: this.user_lat,
-            lng: this.user_lng,
-            marker: userMarker
+        if (this.isChoosingLocation) {
+            setUpLocationChooser(this, mymap);
         }
-
-        var that = this;
-        mymap.on('click', function(e) {
-            if (that.destination.marker) {
-                that.destination.marker.removeFrom(that.mymap);
-            }
-
-            var marker = that.$L.marker(e.latlng);
-            marker.addTo(that.mymap);
-            that.destination = {
-                lat: e.latlng.lat,
-                lng: e.latlng.lng,
-                marker
-            }
-        });
     })
 
   }
+}
+
+function setUpLocationChooser(that, mymap) {
+    console.log("setting up");
+    var userMarker = that.$L.marker({lat:that.user_lat, lng:that.user_lon, color: "#FF0000"});
+    userMarker.addTo(that.mymap);
+    that.destination = {
+        lat: that.user_lat,
+        lng: that.user_lng,
+        marker: userMarker
+    }
+    that.$root.$data.vuey.finalDestinationLocation = that.destination;
+
+    mymap.on('click', function(e) {
+        if (that.destination.marker) {
+            that.destination.marker.removeFrom(that.mymap);
+        }
+
+        var marker = that.$L.marker(e.latlng);
+        marker.addTo(that.mymap);
+        that.destination = {
+            lat: e.latlng.lat,
+            lng: e.latlng.lng,
+            marker
+        }
+        that.$root.$data.vuey.finalDestinationLocation = that.destination;
+    });
 }
 </script>
 
