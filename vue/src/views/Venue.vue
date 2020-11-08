@@ -104,6 +104,7 @@ export default {
       }else{
         // u:user p:point
         var d_u2p = distance({"lat":this.info.point.lat , "lon":this.info.point.lon}, this.$root.$data.vuey.userCurrentLocation);
+        this.$root.$data.vuey.visitedXID.push(this.xid);
 
         this.$root.$data.vuey.walkDistance = this.$root.$data.vuey.walkDistance - d_u2p
 
@@ -111,6 +112,7 @@ export default {
           "lat": this.info.point.lat,
           "lon": this.info.point.lon
         };
+
         router.push("ChooseNextVenue");
       }
     }

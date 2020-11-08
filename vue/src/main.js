@@ -16,7 +16,8 @@ var store = {
         finalDestinationLocation: null,
         venue_detail: {},
         category_preference: "interesting_places",
-        walkDistance: 1000
+        walkDistance: 1000,
+        visitedXID: []
     }
 }
 

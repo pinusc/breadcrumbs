@@ -58,6 +58,13 @@ export default {
         Map,
         VenueList
     },
+    data: function() {
+        return {
+          greenIcon: this.$L.icon({iconUrl: '/static/img/marker-icon-green.png'}),
+          redIcon: this.$L.icon({iconUrl: '/static/img/marker-icon-red.png'}),
+          blueIcon: this.$L.icon({iconUrl: '/static/img/marker-icon.png'})
+        }
+    },
     computed: {
         user_lat: function(){
             return this.$root.$data.vuey.userCurrentLocation.lat;
@@ -102,10 +109,13 @@ export default {
                 //var d_u2t = distance(this.$root.$data.vuey.userCurrentLocation, this.$root.$data.vuey.finalDestinationLocation);
 
                 if (d_u2p + d_p2t < this.$root.$data.vuey.walkDistance * 0.95){
-                    var marker = this.$L.marker(point);
-                    marker.addTo(this.$refs.map.mymap);
 
                     var venue = data[i];
+                    var marker = this.$L.marker(point);
+                    marker.addTo(this.$refs.map.mymap);
+                    if (venue.xid in this.$root.$data.vuey.visitedXID) {
+                        marker.setIcon(this.greenIcon);
+                    }
                     venue.marker = marker;
                     this.$refs.vlist.addVenue(venue);
                 }
