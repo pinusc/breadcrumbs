@@ -54,7 +54,7 @@ export default {
                 console.log("heys");
                 // make ajax request and load data
                 const { data } = await this.$http.get(
-                    'http://localhost:5000/api/otm/detail', {
+                    '/api/otm/detail', {
                         params: {
                             xid: this.venue.xid
                         }
