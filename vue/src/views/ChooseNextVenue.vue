@@ -28,11 +28,12 @@ export default {
     methods: {
         async getLocations () {
             const { data } = await this.$http.get(
-                '/api/otm', {
+                'http://localhost:5000/api/otm', {
                     params: {
                         lat: this.user_lat,
                         lon: this.user_lon,
-                        radius: 5000
+                        radius: 5000,
+                        categories: this.$root.$data.vuey.category_preference
                     }
                 }
             );

@@ -33,7 +33,8 @@ const routes = [
     },
     {
         path: '/ChooseNextVenue',
-        component: ChooseNextVenue
+        component: ChooseNextVenue,
+        name: 'ChooseNextVenue'
     },
     {
         path: '/Venue',
