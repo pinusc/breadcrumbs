@@ -20,9 +20,7 @@ export default {
   name: 'Map',
   data: function() {
     return{
-      venues:[{"name":"a"}],
-      user_lat: Number,
-      user_lon: Number
+      venues:[{"name":"a"}]
     }
   },
   components: {
@@ -30,6 +28,14 @@ export default {
   },
   props: {
     msg: String,
+  },
+  computed: {
+    user_lat: function(){
+      return this.$root.$data.vuey.userLocation.lat;
+    },
+    user_lon: function(){
+      return this.$root.$data.vuey.userLocation.lon;
+    }
   },
 
   methods:{
@@ -53,9 +59,6 @@ export default {
     }
   },
   mounted: function() {
-    this.user_lat = 51.500944;
-    this.user_lon = 0.124618;
-    // var mymap = L.map('mapid').setView([51.505, -0.09], 13)
     this.$nextTick(function () {
     // Code that will run only after the
     // entire view has been rendered
