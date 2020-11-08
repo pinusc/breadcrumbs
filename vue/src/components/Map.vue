@@ -46,8 +46,9 @@ export default {
             accessToken: 'pk.eyJ1IjoicGludXNjIiwiYSI6ImNraDgyNjRrejA1ZGEycnFpZXU5dTJqMjkifQ.RyyPpqxIelqUtOiWdn4efg'
         }).addTo(mymap);
         this.mymap = mymap;
-        var userlocation = this.$L.circle([this.user_lat, this.user_lon], {radius: 50}).addTo(mymap);
-        userlocation.setStyle({color: "#FF0000"});
+        var darkIcon = this.$L.icon({iconUrl: '/static/img/marker-icon-darkgreen.png'});
+        var userMarker = this.$L.marker([this.user_lat, this.user_lon]).addTo(mymap);
+        userMarker.setIcon(darkIcon);
         if (this.isChoosingLocation) {
             setUpLocationChooser(this, mymap);
         }
@@ -62,7 +63,7 @@ function setUpLocationChooser(that, mymap) {
     userMarker.addTo(that.mymap);
     that.destination = {
         lat: that.user_lat,
-        lng: that.user_lng,
+        lon: that.user_lng,
         marker: userMarker
     }
     that.$root.$data.vuey.finalDestinationLocation = that.destination;
@@ -76,7 +77,7 @@ function setUpLocationChooser(that, mymap) {
         marker.addTo(that.mymap);
         that.destination = {
             lat: e.latlng.lat,
-            lng: e.latlng.lng,
+            lon: e.latlng.lng,
             marker
         }
         that.$root.$data.vuey.finalDestinationLocation = that.destination;

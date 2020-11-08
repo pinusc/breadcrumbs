@@ -61,6 +61,7 @@ export default {
     data: function() {
         return {
           greenIcon: this.$L.icon({iconUrl: '/static/img/marker-icon-green.png'}),
+          purpleIcon: this.$L.icon({iconUrl: '/static/img/marker-icon-purple.png'}),
           redIcon: this.$L.icon({iconUrl: '/static/img/marker-icon-red.png'}),
           blueIcon: this.$L.icon({iconUrl: '/static/img/marker-icon.png'})
         }
@@ -116,10 +117,13 @@ export default {
                 if (d_u2p + d_p2t < this.$root.$data.vuey.walkDistance * 0.95){
 
                     var venue = data[i];
+                    console.log(venue);
                     var marker = this.$L.marker(point);
                     marker.addTo(this.$refs.map.mymap);
-                    if (venue.xid in this.$root.$data.vuey.visitedXID) {
+                    if (this.$root.$data.vuey.visitedXID.includes(venue.xid)) {
                         marker.setIcon(this.greenIcon);
+                    } else if (venue.xid === "SPECIAL_TARGET") {
+                        marker.setIcon(this.purpleIcon);
                     }
                     venue.marker = marker;
                     this.$refs.vlist.addVenue(venue);
