@@ -12,6 +12,11 @@ app = Flask(__name__,
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+@app.route('/static/<path:path>')
+def send_static(path):
+    print(path)
+    return send_from_directory('static', path)
+
 
 @app.route('/js/<path:path>')
 def send_js(path):
@@ -31,7 +36,7 @@ def api_venues_otm_detail():
     data = get_venue_details_from_OTM(xid)
 
     return json.dumps(data)
-    
+
 @app.route("/api/otm")
 def api_venues_otm():
     lat = request.args.get('lat')
@@ -40,7 +45,7 @@ def api_venues_otm():
         radius = request.args.get('radius')
     else:
         radius = 3500
-    
+
     if "categories" in request.args:
         categories = request.args.get('categories')
     else:
@@ -62,7 +67,7 @@ def api_venues():
 
     return json.dumps(data)
 
-@app.route('/*')
+@app.route('/')
 def serve_index():
     return render_template("index.html")
 
