@@ -54,7 +54,10 @@ export default {
             accessToken: 'pk.eyJ1IjoicGludXNjIiwiYSI6ImNraDgyNjRrejA1ZGEycnFpZXU5dTJqMjkifQ.RyyPpqxIelqUtOiWdn4efg'
         }).addTo(mymap);
         this.mymap = mymap;
+        var userlocation = this.$L.circle([this.user_lat, this.user_lon], {radius: 50}).addTo(mymap);
+        userlocation.setStyle({color: "#FF0000"});
     })
+
   }
 }
 </script>
