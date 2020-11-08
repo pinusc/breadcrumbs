@@ -84,7 +84,7 @@ def get_venues_from_OTM(lat, lon, radius=3500, categories="interesting_places"):
         kinds = categories,
         format = "json",
         apikey = "5ae2e3f221c38a28845f05b677a3c8a48be4b3462eb96b2ca683d48c",
-        limit = 50,
+        limit = 10,
         rate = 3
         )
     resp = requests.get(url=url, params=params)
