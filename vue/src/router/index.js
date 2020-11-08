@@ -37,7 +37,8 @@ const routes = [
     },
     {
         path: '/Venue',
-        component: Venue
+        component: Venue,
+        name: 'Venue'
     },
     {
         path: '/Final',
