@@ -62,8 +62,9 @@ def api_venues():
 
     return json.dumps(data)
 
-@app.route('/*')
-def serve_index():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_index(path):
     return render_template("index.html")
 
 def get_venues_from_OTM(lat, lon, radius=3500, categories="interesting_places"):
