@@ -20,8 +20,6 @@ export default {
   data: function() {
     return{
       venues:[{"name":"a"}],
-      user_lat: Number,
-      user_lon: Number,
       destination: {lat: null, lng: null, marker: null}
     }
   },
@@ -30,6 +28,14 @@ export default {
   },
   props: {
     msg: String,
+  },
+  computed: {
+    user_lat: function(){
+      return this.$root.$data.vuey.userLocation.lat;
+    },
+    user_lon: function(){
+      return this.$root.$data.vuey.userLocation.lon;
+    }
   },
 
   methods:{
@@ -51,14 +57,8 @@ export default {
         this.$refs.vlist.addVenue(data[i]);
       }  
     },
-    mapClicked (e) {
-        console.log(e);
-    }
   },
   mounted: function() {
-    this.user_lat = 51.500944;
-    this.user_lon = 0.124618;
-    // var mymap = L.map('mapid').setView([51.505, -0.09], 13)
     this.$nextTick(function () {
     // Code that will run only after the
     // entire view has been rendered
@@ -86,14 +86,13 @@ export default {
 
         var that = this;
         mymap.on('click', function(e) {
-            console.log(e.latlng);
-            if (that.lastClicked.marker) {
-                that.lastClicked.marker.removeFrom(that.mymap);
+            if (that.destination.marker) {
+                that.destination.marker.removeFrom(that.mymap);
             }
 
             var marker = that.$L.marker(e.latlng);
             marker.addTo(that.mymap);
-            that.lastClicked = {
+            that.destination = {
                 lat: e.latlng.lat,
                 lng: e.latlng.lng,
                 marker

@@ -9,11 +9,14 @@
             <div v-else>
                 <p>Unfortunately, we couldn't find more info on this venue. Try using a search engine?</p>
             </div>
+            <button v-on:click="selectVenue">I wanna go to this location!</button>
         </div>
     </div>
 </template>
 
 <script>
+import router from '../router'
+
 export default {
   name: 'VenueListItem',
   props: ["venue"],
@@ -55,6 +58,9 @@ export default {
 
             }
           }
+      },
+      selectVenue(){
+          router.push("Venue")
       }
     
   }

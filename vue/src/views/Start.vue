@@ -32,7 +32,7 @@
           </label>
       </div>
       <div id=next-page class="box has-background-link has-text-light has-text-centered">
-          <router-link class="has-text-light" to="/SelectDestination">Show me what's around!</router-link>
+          <router-link class="has-text-light" to="/ChooseNextVenue">Show me what's around!</router-link>
       </div>
   </div>
 </template>
