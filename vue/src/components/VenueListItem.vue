@@ -12,6 +12,9 @@
                 </div>
                 <router-link :to="{name: 'Venue', params: {xid: this.venue.xid}}" ><button class="button is-small is-light">I wanna go to this location!</button></router-link>
             </div>
+            <div v-else>
+                <progress class="progress is-small is-primary" max="100"></progress>
+            </div>
         </div>
     </div>
 </template>
