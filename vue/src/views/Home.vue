@@ -23,7 +23,7 @@
       </section>
 
         <figure class="image">
-        <img src="/city.jpeg">
+        <img src="/static/city.jpeg">
       </figure>
       
   </div>
