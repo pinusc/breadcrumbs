@@ -28,7 +28,7 @@ export default {
     methods: {
         async getLocations () {
             const { data } = await this.$http.get(
-                '/api/otm', {
+                'http://localhost:5000/api/otm', {
                     params: {
                         lat: this.user_lat,
                         lon: this.user_lon,
@@ -48,7 +48,6 @@ export default {
     },
     created(){
         this.getLocations();
-        this.$root.$data.vuey.category_preference = this.$route.params.categoriesJoined;
     }
 
 }

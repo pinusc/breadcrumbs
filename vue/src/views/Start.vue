@@ -5,7 +5,7 @@
               <h1 class=title>Breadcrumbs</h1>
           </div>
       </section>
-      <div class="box has-background-info is-size-5">
+      <div class="box has-background-info is-size-5" @click="updateCategoryPreference">
           <h1 class="subtitle has-text-light">What kind of places would you like to see?</h1>
           <ul id=categories-list>
               <li v-for="i in categories.length" :key=i>
@@ -40,7 +40,7 @@
           
       </div>
       <div id=next-page class="box has-background-link has-text-light has-text-centered">
-          <router-link class="has-text-light" :to="{name:'ChooseNextVenue', params:{categoriesJoined: this.categoriesJoin}}">Show me what's around!</router-link>
+          <router-link class="has-text-light" :to="{name:'ChooseNextVenue'}">Show me what's around!</router-link>
       </div>
   </div>
 </template>
@@ -52,9 +52,9 @@ export default {
     name: 'Start',
     data: function() {
         return {
-            categories: ["architecture", "cultural", "historic", "industrial_facilities", "natural", "religion", "other"],
-            categoriesChecked: [false, false, false, false, false, false],
-            categoryNames: ["Architecture", "Cultural", "Historic", "Industrial facilities", "Natural", "Religion", "Other"],
+            categories: ["architecture", "cultural", "historic", "natural","industrial_facilities", "religion", "other"],
+            categoriesChecked: [false, false, true, true, false, false, false],
+            categoryNames: ["Architecture", "Cultural", "Historic", "Natural", "Industrial facilities", "Religion", "Other"],
             maxWalkDistance: null
         }
     },
@@ -70,7 +70,13 @@ export default {
             }
             return toJoin.join(",");
         }
+    },
+    methods:{
+        updateCategoryPreference(){
+            this.$root.$data.vuey.category_preference = this.categoriesJoin;
+        }
     }
+
 }
 </script>
 

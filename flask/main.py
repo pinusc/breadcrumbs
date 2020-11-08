@@ -45,6 +45,7 @@ def api_venues_otm():
         categories = request.args.get('categories')
     else:
         categories = "interesting_places"
+    print(request.args)
 
     data = get_venues_from_OTM(lat,lon, radius, categories)
 
