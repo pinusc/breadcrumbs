@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button v-on:click="queryLocation"> get location </button>
+        <button class="button is-link" v-on:click="queryLocation">Fetch Location from GPS</button>
         <p id="locationData"></p>
     </div>
 </template>

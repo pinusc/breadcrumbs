@@ -1,18 +1,34 @@
 <template>
   <div class="home">
-      <router-link to="/Start">Start</router-link>
-    <Map />
+    
+      <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            breadcrumbs
+          </h1>
+          <h2 class="subtitle">
+            Explore cities, the better way...
+          </h2>
+          <router-link to="/Destination">
+    <button class="button is-primary is-light">Start</button>
+    </router-link>  
+        </div>
+      </div>
+    </section>
+
+        <figure class="image">
+        <img src="../assets/city.jpeg">
+      </figure>
+      
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Map from '@/components/Map.vue'
+
 
 export default {
-  name: 'Home',
-  components: {
-    Map
-  }
+  name: 'Home'
 }
 </script>

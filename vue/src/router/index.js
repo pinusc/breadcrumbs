@@ -28,7 +28,7 @@ const routes = [
         component: Start
     },
     {
-        path: '/SelectDestination',
+        path: '/Destination',
         component: Destination
     },
     {
