@@ -12,6 +12,7 @@ var store = {
     state: {
         message: 'Hello!',
         userLocation: null,
+        userCurrentLocation: null,
         finalDestinationLocation: null,
         venue_detail: {},
         category_preference: "interesting_places"

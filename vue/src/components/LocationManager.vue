@@ -13,6 +13,7 @@ function displayLocation(that, position) {
         "lat": position.coords.latitude,
         "lon": position.coords.longitude
     };
+    that.$root.$data.vuey.userCurrentLocation = that.$root.$data.vuey.userLocation;
     document.getElementById("locationData").innerHTML = displayText;
 }
 
@@ -57,6 +58,8 @@ export default {
                 "lat": 51.500944,
                 "lon": 0.124618
             };
+
+            this.$root.$data.vuey.userCurrentLocation = this.$root.$data.vuey.userLocation;
             console.log("added test lat/lon because lat/lon was not available");
         }
 

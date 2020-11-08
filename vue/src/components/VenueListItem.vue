@@ -4,7 +4,6 @@
         <div v-if="expanded">
             <div v-if="dataLoaded">
                 <div id="wiki-blurb" v-if="hasWikipediaExtracts">
-                    <h1>{{this.info.wikipedia_extracts.title.substr(3)}}</h1>
                     <div v-html="this.info.wikipedia_extracts.html"></div>
                 </div>
                 <div v-else>
