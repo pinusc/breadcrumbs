@@ -15,9 +15,6 @@
           <h1 class="subtitle has-text-light">We need your current location to suggest venues.</h1>
           <LocationManager />
       </div>
-      <router-link v-else to="/Destination">
-      <button  class="button is-primary is-light">Start</button>
-      </router-link>  
           </div>
         </div>
       </section>

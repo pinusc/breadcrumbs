@@ -39,6 +39,32 @@
 // @ is an alias to /src
 import router from '@/router'
 
+function distance(loc1, loc2) {
+    var lat1 = loc1.lat;
+    var lat2 = loc2.lat;
+    var lon1 = loc1.lon;
+    var lon2 = loc2.lon;
+
+	if ((lat1 == lat2) && (lon1 == lon2)) {
+		return 0;
+	}
+	else {
+		var radlat1 = Math.PI * lat1/180;
+		var radlat2 = Math.PI * lat2/180;
+		var theta = lon1-lon2;
+		var radtheta = Math.PI * theta/180;
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		if (dist > 1) {
+			dist = 1;
+		}
+		dist = Math.acos(dist);
+		dist = dist * 180/Math.PI;
+		dist = dist * 60 * 1.1515;
+		dist = dist * 1.609344 * 1000 // to km, and then meters
+		return dist;
+	}
+}
+
 export default {
   name: 'Venue',
   data: function(){
@@ -76,6 +102,11 @@ export default {
         this.info.point.lon == this.$root.$data.vuey.finalDestinationLocation.lon ){
           router.push("Final");
       }else{
+        // u:user p:point
+        var d_u2p = distance({"lat":this.info.point.lat , "lon":this.info.point.lon}, this.$root.$data.vuey.userCurrentLocation);
+
+        this.$root.$data.vuey.walkDistance = this.$root.$data.vuey.walkDistance - d_u2p
+
         this.$root.$data.vuey.userCurrentLocation = {
           "lat": this.info.point.lat,
           "lon": this.info.point.lon

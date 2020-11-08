@@ -5,7 +5,7 @@
               <h1 class=title>Breadcrumbs</h1>
           </div>
       </section>
-      <div class="box has-background-info is-size-5" @click="updateCategoryPreference">
+      <div class="box has-background-info is-size-5">
           <h1 class="subtitle has-text-light">What kind of places would you like to see?</h1>
           <ul id=categories-list>
               <li v-for="i in categories.length" :key=i>
@@ -30,7 +30,7 @@
         <div class="columns">
 
            <div class="column is-two-thirds">  
-                <input class="input" type="number" v-model="maxWalkDistance" value=1000>
+                <input class="input" type="number" v-model="walkDist">
            </div>
            <div class="column is-one-third">
                 <p>meters</p>
@@ -39,25 +39,24 @@
         </div>
           
       </div>
-      <router-link class="has-text-light" :to="{name:'ChooseNextVenue'}">
-        <div id=next-page class="box has-background-link has-text-light has-text-centered">
+        <div  @click="navigateForward" id=next-page class="box has-background-link has-text-light has-text-centered">
             Show me what's around!
         </div>
-      </router-link>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import router from '@/router'
 
 export default {
     name: 'Start',
     data: function() {
         return {
             categories: ["historic", "natural", "architecture", "cultural", "industrial_facilities", "religion", "other"],
-            categoriesChecked: [true, true, true, false, false, false, false],
+            categoriesChecked: [true, true, true, true, true, false, false],
             categoryNames: ["Historic", "Natural", "Architecture", "Cultural", "Industrial facilities", "Religion", "Other"],
-            maxWalkDistance: null
+            walkDist: 5000
         }
     },
     computed:{
@@ -74,8 +73,10 @@ export default {
         }
     },
     methods:{
-        updateCategoryPreference(){
+        navigateForward(){
             this.$root.$data.vuey.category_preference = this.categoriesJoin;
+            this.$root.$data.vuey.walkDistance = this.walkDist;
+            router.push('ChooseNextVenue')
         }
     }
 

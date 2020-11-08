@@ -15,7 +15,8 @@ var store = {
         userCurrentLocation: null,
         finalDestinationLocation: null,
         venue_detail: {},
-        category_preference: "interesting_places"
+        category_preference: "interesting_places",
+        walkDistance: 1000
     }
 }
 
