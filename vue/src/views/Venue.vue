@@ -28,7 +28,7 @@
         <div v-else>
             <p>Unfortunately, we couldn't find more info on this venue. Try using a search engine?</p>
         </div>
-        <a :href="directionsUrl"><button class="button is-pulled-left is-light">Get Directions</button></a>
+        <a :href="directionsUrl" target="_blank"><button class="button is-pulled-left is-light">Get Directions</button></a>
         <button class="button is-pulled-right is-primary" @click="finalizeVenue">I'm here</button>
       </div>
 
