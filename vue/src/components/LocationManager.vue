@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class=text-center>
         <button class="button is-link" v-on:click="queryLocation">Fetch Location from GPS</button>
-        <p>or <button @click="useDummyLocation">use dummy var for testing</button></p>
-        <p id="locationData"></p>
+        <span class="mx-5">or</span>
+        <button class="button is-danger" @click="useDummyLocation">use dummy var for testing</button>
     </div>
 </template>
 
