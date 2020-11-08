@@ -8,9 +8,18 @@ Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
+var store = {
+    state: {
+        message: 'Hello!'
+    }
+}
+
 new Vue({
-  router,
-  render: h => h(App)
+    router,
+    render: h => h(App),
+    data: {
+        sharedState: store.state,
+    }
 }).$mount('#app')
 
 import L from 'leaflet'
