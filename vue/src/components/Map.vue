@@ -4,15 +4,12 @@
 
 <template>
   <div id="mapview">
-  <button v-on:click="ajaxm"> Get Locations </button>
-  <VenueList ref="vlist"/>
   <div id="mapid"></div>
   </div>
 
 </template>
 
 <script>
-import VenueList from './VenueList.vue'
 //import Vue from 'vue'
 
 export default {
@@ -22,9 +19,6 @@ export default {
       venues:[{"name":"a"}],
       destination: {lat: null, lng: null, marker: null}
     }
-  },
-  components: {
-    VenueList
   },
   props: {
     msg: String,
@@ -36,27 +30,6 @@ export default {
     user_lon: function(){
       return this.$root.$data.vuey.userLocation.lon;
     }
-  },
-
-  methods:{
-    async ajaxm () {
-      const { data } = await this.$http.get(
-              'http://localhost:5000/api/otm', {
-                params: {
-                    lat: this.user_lat,
-                    lon: this.user_lon,
-                    radius: 5000
-                }
-              }
-      );
-      for (var i = 0; i < data.length; i++) {
-        var point = [data[i].point.lat, data[i].point.lon]
-        console.log(point)
-        this.$L.marker(point).addTo(this.mymap);
-
-        this.$refs.vlist.addVenue(data[i]);
-      }  
-    },
   },
   mounted: function() {
     this.$nextTick(function () {
