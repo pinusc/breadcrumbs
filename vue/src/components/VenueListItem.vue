@@ -50,6 +50,10 @@ export default {
       async toggleExpand(){
           this.expanded = !this.expanded
           if(this.expanded){
+            if (this.venue.xid in this.$root.$data.vuey.venue_detail){
+                this.dataLoaded = true;
+            }
+            
             if(! this.dataLoaded){
                 console.log("heys");
                 // make ajax request and load data

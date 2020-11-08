@@ -78,15 +78,30 @@ export default {
                     }
                 }
             );
+            if(! ("SPECIAL_TARGET" in this.$root.$data.vuey.venue_detail)){
+            
+                var targetObject = {
+                    "xid": "SPECIAL_TARGET",
+                    "name": "Your Designated Target Marker",
+                    point: this.$root.$data.vuey.finalDestinationLocation,
+                    wikipedia_extracts: {
+                        "html": "This label represents the target destination you designated at the start of the application. You can use this as place to visit in order to get directions and/or finish your breadcrumb experience. Thanks for using breadcrumb and exploring the city with us!"
+                    }
+                
+                }
+                this.$root.$data.vuey.venue_detail["SPECIAL_TARGET"] = targetObject;
+                data.unshift(targetObject);
+            }
+
             for (var i = 0; i < data.length; i++) {
                 var point = [data[i].point.lat, data[i].point.lon]
 
                 // u:user p:point t:target
                 var d_u2p = distance({"lat":data[i].point.lat, "lon":data[i].point.lon}, this.$root.$data.vuey.userCurrentLocation);
                 var d_p2t = distance({"lat":data[i].point.lat, "lon":data[i].point.lon}, this.$root.$data.vuey.finalDestinationLocation);
-                var d_u2t = distance(this.$root.$data.vuey.userCurrentLocation, this.$root.$data.vuey.finalDestinationLocation);
+                //var d_u2t = distance(this.$root.$data.vuey.userCurrentLocation, this.$root.$data.vuey.finalDestinationLocation);
 
-                if (d_u2p + d_p2t - d_u2t < this.$root.$data.vuey.walkDistance * 0.8){
+                if (d_u2p + d_p2t < this.$root.$data.vuey.walkDistance * 0.95){
                     var marker = this.$L.marker(point);
                     marker.addTo(this.$refs.map.mymap);
 

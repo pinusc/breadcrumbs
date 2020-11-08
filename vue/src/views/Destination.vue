@@ -16,7 +16,6 @@
       <section v-if="this.$root.$data.vuey.userLocation">
           <div class="box has-background-info has-text-centered">
               <button class="button is-warning mb-4" @click="setTargetLocation('userLocation')">Where I am right now</button>
-              <span id="or">OR</span>
               <hr />
               <Map v-bind:is-choosing-location=true />
                   <router-link to="Start" class="button is-warning mt-4">The map marker</router-link>
