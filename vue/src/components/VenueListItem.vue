@@ -1,10 +1,9 @@
 <template>
-    <div class="box">
-        <p v-on:click="toggleExpand" v-bind:class="{active: expanded}">{{venue.name}}</p>
+    <div class="box is-clickable has-shadow">
+        <p class="subtitle has-text-weight-semibold" v-on:click="toggleExpand" v-bind:class="{active: expanded}">{{venue.name}}</p>
         <div v-if="expanded">
             <div v-if="dataLoaded">
                 <div id="wiki-blurb" v-if="hasWikipediaExtracts">
-                    <h1>{{this.info.wikipedia_extracts.title.substr(3)}}</h1>
                     <div v-html="this.info.wikipedia_extracts.html"></div>
                 </div>
                 <div v-else>
@@ -77,9 +76,6 @@ export default {
 </script>
 
 <style scoped>
-.box{
-    margin:0;
-}
 .active{
     font-weight: bold;
 }

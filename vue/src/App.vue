@@ -24,4 +24,13 @@
     }
   }
 }
+
+.box {
+    margin: 0.5rem;
+}
+
+.box:not(:last-child) {
+    margin-bottom: 0;
+}
+
 </style>
