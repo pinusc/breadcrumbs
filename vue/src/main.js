@@ -11,7 +11,8 @@ Vue.config.productionTip = false
 var store = {
     state: {
         message: 'Hello!',
-        userLocation: null
+        userLocation: null,
+        finalDestinationLocation: null
     }
 }
 

@@ -1,20 +1,23 @@
 <template>
     <div>
         <button class="button is-link" v-on:click="queryLocation">Fetch Location from GPS</button>
+        <p>or <button @click="useDummyLocation">use dummy var for testing</button></p>
         <p id="locationData"></p>
     </div>
 </template>
 
 <script>
 function displayLocation(position) { 
-    var displayText = "User latitude is " + position.coords.latitude + " and longitude is " + position.coords.longitude;
-    //display the string for demonstration
-    console.log(displayText);
+    var displayText = "Your latitude is " + position.coords.latitude + " and longitude is " + position.coords.longitude;
+    this.$root.$data.vuey.userLocation = {
+        "lat": position.coords.latitude,
+        "lon": position.coords.longitude
+    };
     document.getElementById("locationData").innerHTML = displayText;
 }
 
 function displayError(error) { 
-
+    
     //get a reference to the HTML element for writing result
     var locationElement = document.getElementById("locationData");
 
@@ -49,6 +52,13 @@ export default {
             else
                 document.getElementById("locationData").innerHTML = "Sorry - your browser doesn't support geolocation!";
         },
+        useDummyLocation(){
+            this.$root.$data.vuey.userLocation = {
+                "lat": 51.500944,
+                "lon": 0.124618
+            };
+            console.log("added test lat/lon because lat/lon was not available");
+        }
 
     }
 }
