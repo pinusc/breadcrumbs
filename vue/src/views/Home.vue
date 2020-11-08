@@ -10,12 +10,17 @@
           <h2 class="subtitle">
             Explore cities, the better way...
           </h2>
-          <router-link to="/Destination">
-    <button class="button is-primary is-light">Start</button>
-    </router-link>  
-        </div>
+          
+      <div v-if="!this.$root.$data.vuey.userLocation">
+          <h1 class="subtitle has-text-light">We need your current location to suggest venues.</h1>
+          <LocationManager />
       </div>
-    </section>
+      <router-link v-else to="/Destination">
+      <button  class="button is-primary is-light">Start</button>
+      </router-link>  
+          </div>
+        </div>
+      </section>
 
         <figure class="image">
         <img src="../assets/city.jpeg">
@@ -26,9 +31,12 @@
 
 <script>
 // @ is an alias to /src
-
+import LocationManager from '@/components/LocationManager.vue'
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+      LocationManager
+    }
 }
 </script>

@@ -5,12 +5,7 @@
               <h1 class=title>Breadcrumbs</h1>
           </div>
       </section>
-    <section v-if="!this.$root.$data.vuey.userLocation">
-      <div class="box has-background-info">
-          <h1 class="subtitle has-text-light">We need your current location to suggest venues.</h1>
-          <LocationManager />
-      </div>
-    </section>
+
       <section v-if="this.$root.$data.vuey.userLocation">
           <div class="box has-background-info has-text-centered">
               <h1 class="subtitle has-text-light">Where would you like to end your trip at?</h1>
@@ -24,14 +19,13 @@
 
 <script>
 // @ is an alias to /src
-import LocationManager from '@/components/LocationManager.vue'
+
 import Map from '@/components/Map.vue'
 import router from '@/router'
 
 export default {
     name: 'Destination',
     components: {
-      LocationManager,
       Map
     },
     data: function(){
