@@ -91,7 +91,12 @@ export default {
                 }
                 this.$root.$data.vuey.venue_detail["SPECIAL_TARGET"] = targetObject;
                 data.unshift(targetObject);
+                
+            }else{
+                data.unshift(this.$root.$data.vuey.venue_detail["SPECIAL_TARGET"]);
             }
+            
+
 
             for (var i = 0; i < data.length; i++) {
                 var point = [data[i].point.lat, data[i].point.lon]
