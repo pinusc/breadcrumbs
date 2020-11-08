@@ -28,7 +28,7 @@ export default {
     methods: {
         async getLocations () {
             const { data } = await this.$http.get(
-                'http://localhost:5000/api/otm', {
+                '/api/otm', {
                     params: {
                         lat: this.user_lat,
                         lon: this.user_lon,
