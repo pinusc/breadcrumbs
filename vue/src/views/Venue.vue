@@ -1,15 +1,36 @@
 <template>
   <div class="home">
-      <p>xid:  {{this.xid}}</p>
-      <h1>You're going to <b>{{this.info.name}}</b></h1>
-      <div id="wiki-blurb" v-if="hasWikipediaExtracts">
-          <h1>{{this.info.wikipedia_extracts.title.substr(3)}}</h1>
-          <div v-html="this.info.wikipedia_extracts.html"></div>
+
+      <section class="hero is-primary">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">
+        <h1>You're going to <b>{{this.info.name}}</b></h1>
+              </h1>
+              <h2 class="subtitle">
+                Don't forget to enjoy your journey!
+              </h2>
+            </div>
+          </div>
+        </section>
+
+
+
+      
+      <div class="box is-clearfix">
+        <div id="preview" v-if="hasPreview">
+          <img :src="this.info.preview.source">
+        </div>
+        <div id="wiki-blurb" v-if="hasWikipediaExtracts">
+
+            <div v-html="this.info.wikipedia_extracts.html"></div>
+        </div>
+        <div v-else>
+            <p>Unfortunately, we couldn't find more info on this venue. Try using a search engine?</p>
+        </div>
+        <a :href="directionsUrl" target="_blank"><button class="button is-pulled-left is-light">Get Directions</button></a>
+        <button class="button is-pulled-right is-primary" @click="finalizeVenue">I'm here</button>
       </div>
-      <div v-else>
-          <p>Unfortunately, we couldn't find more info on this venue. Try using a search engine?</p>
-      </div>
-      <button @click="finalizeVenue">I'm here</button>
 
   </div>
 </template>
@@ -26,7 +47,7 @@ export default {
     }
   },
   computed:{
-    hasAdress: function(){
+      hasAdress: function(){
           return 'address' in this.$root.$data.vuey.venue_detail[this.xid]
       },
       hasWikipediaLink: function(){
@@ -35,8 +56,18 @@ export default {
       hasWikipediaExtracts: function(){
           return 'wikipedia_extracts' in this.$root.$data.vuey.venue_detail[this.xid]
       },
+      hasPreview: function(){
+        return 'preview' in this.$root.$data.vuey.venue_detail[this.xid]
+      },
       info: function(){
           return this.$root.$data.vuey.venue_detail[this.xid];
+      },
+      directionsUrl: function(){
+        var currLocation = this.$root.$data.vuey.userCurrentLocation;
+        var destLocation = this.info.point
+        return "https://www.google.com/maps/dir/" +
+          currLocation.lat.toString() + "," + currLocation.lon.toString() + "/" + 
+          destLocation.lat.toString() + "," + destLocation.lon.toString();
       }
   },
   methods:{
@@ -45,6 +76,10 @@ export default {
         this.info.point.lon == this.$root.$data.vuey.finalDestinationLocation.lon ){
           router.push("Final");
       }else{
+        this.$root.$data.vuey.userCurrentLocation = {
+          "lat": this.info.point.lat,
+          "lon": this.info.point.lon
+        };
         router.push("ChooseNextVenue");
       }
     }
