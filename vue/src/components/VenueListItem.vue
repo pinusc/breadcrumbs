@@ -27,7 +27,9 @@ export default {
   data: function(){
       return {
           expanded: false,
-          dataLoaded: false
+          dataLoaded: false,
+          redIcon: this.$L.icon({iconUrl: '/static/img/marker-icon-red.png'}),
+          blueIcon: this.$L.icon({iconUrl: '/static/img/marker-icon.png'})
       }
   },
   
@@ -50,6 +52,7 @@ export default {
       async toggleExpand(){
           this.expanded = !this.expanded
           if(this.expanded){
+             this.venue.marker.setIcon(this.redIcon);
             if(! this.dataLoaded){
                 console.log("heys");
                 // make ajax request and load data
@@ -63,8 +66,9 @@ export default {
                 console.log(data);
                 this.dataLoaded = true;
                 this.$root.$data.vuey.venue_detail[this.venue.xid] = data;
-
             }
+          } else {
+             this.venue.marker.setIcon(this.blueIcon);
           }
       },
       selectVenue(){
