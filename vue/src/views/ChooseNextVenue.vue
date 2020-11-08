@@ -25,6 +25,33 @@
 import Map from '@/components/Map.vue'
 import VenueList from '@/components/VenueList.vue'
 
+function distance(loc1, loc2) {
+    var lat1 = loc1.lat;
+    var lat2 = loc2.lat;
+    var lon1 = loc1.lon;
+    var lon2 = loc2.lon;
+
+	if ((lat1 == lat2) && (lon1 == lon2)) {
+		return 0;
+	}
+	else {
+		var radlat1 = Math.PI * lat1/180;
+		var radlat2 = Math.PI * lat2/180;
+		var theta = lon1-lon2;
+		var radtheta = Math.PI * theta/180;
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		if (dist > 1) {
+			dist = 1;
+		}
+		dist = Math.acos(dist);
+		dist = dist * 180/Math.PI;
+		dist = dist * 60 * 1.1515;
+		dist = dist * 1.609344 * 1000 // to km, and then meters
+		return dist;
+	}
+}
+distance({"lat":1,"lon":1},{"lat":1,"lon":1});
+
 export default {
     name: 'ChooseNextVenue',
     components: {
@@ -33,10 +60,10 @@ export default {
     },
     computed: {
         user_lat: function(){
-            return this.$root.$data.vuey.userLocation.lat;
+            return this.$root.$data.vuey.userCurrentLocation.lat;
         },
         user_lon: function(){
-            return this.$root.$data.vuey.userLocation.lon;
+            return this.$root.$data.vuey.userCurrentLocation.lon;
         }
     },
     methods: {
@@ -46,20 +73,29 @@ export default {
                     params: {
                         lat: this.user_lat,
                         lon: this.user_lon,
-                        radius: 50000,
+                        radius: this.$root.$data.vuey.walkDistance/2,
                         categories: this.$root.$data.vuey.category_preference
                     }
                 }
             );
             for (var i = 0; i < data.length; i++) {
                 var point = [data[i].point.lat, data[i].point.lon]
-                console.log(point)
-                var marker = this.$L.marker(point);
-                marker.addTo(this.$refs.map.mymap);
 
-                var venue = data[i];
-                venue.marker = marker;
-                this.$refs.vlist.addVenue(venue);
+                // u:user p:point t:target
+                var d_u2p = distance({"lat":data[i].point.lat, "lon":data[i].point.lon}, this.$root.$data.vuey.userCurrentLocation);
+                var d_p2t = distance({"lat":data[i].point.lat, "lon":data[i].point.lon}, this.$root.$data.vuey.finalDestinationLocation);
+                var d_u2t = distance(this.$root.$data.vuey.userCurrentLocation, this.$root.$data.vuey.finalDestinationLocation);
+
+                if (d_u2p + d_p2t - d_u2t < this.$root.$data.vuey.walkDistance * 0.8){
+                    var marker = this.$L.marker(point);
+                    marker.addTo(this.$refs.map.mymap);
+
+                    var venue = data[i];
+                    venue.marker = marker;
+                    this.$refs.vlist.addVenue(venue);
+                }
+                
+                
             }  
         }
     },

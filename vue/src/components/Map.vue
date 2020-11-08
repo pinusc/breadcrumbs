@@ -26,10 +26,10 @@ export default {
   },
   computed: {
     user_lat: function(){
-      return this.$root.$data.vuey.userLocation.lat;
+      return this.$root.$data.vuey.userCurrentLocation.lat;
     },
     user_lon: function(){
-      return this.$root.$data.vuey.userLocation.lon;
+      return this.$root.$data.vuey.userCurrentLocation.lon;
     }
   },
   mounted: function() {
