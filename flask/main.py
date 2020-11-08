@@ -1,7 +1,7 @@
 #export FLASK_DEBUG=1
 #env FLASK_APP=flask/main.py flask run
 
-from flask import Flask, escape, request, render_template, send_from_directory
+from flask import Flask, escape, request, render_template, send_from_directory, send_static_file
 from flask_cors import CORS, cross_origin
 import json, requests
 
@@ -65,7 +65,7 @@ def api_venues():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_index(path):
-    return render_template("index.html")
+    return send_static_file("index.html")
 
 def get_venues_from_OTM(lat, lon, radius=3500, categories="interesting_places"):
     #radius=10000&lon=0.00001&lat=51.500944&kinds=interesting_places&format=json&apikey=5ae2e3f221c38a28845f05b677a3c8a48be4b3462eb96b2ca683d48c
