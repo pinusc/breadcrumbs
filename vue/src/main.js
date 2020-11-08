@@ -10,7 +10,8 @@ Vue.config.productionTip = false
 
 var store = {
     state: {
-        message: 'Hello!'
+        message: 'Hello!',
+        userLocation: null
     }
 }
 
@@ -18,7 +19,7 @@ new Vue({
     router,
     render: h => h(App),
     data: {
-        sharedState: store.state,
+        vuey: store.state,
     }
 }).$mount('#app')
 
