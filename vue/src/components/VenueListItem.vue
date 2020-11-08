@@ -3,13 +3,16 @@
         <p class="subtitle has-text-weight-semibold" v-on:click="toggleExpand" v-bind:class="{active: expanded}">{{venue.name}}</p>
         <div v-if="expanded">
             <div v-if="dataLoaded">
+                <div id="preview" v-if="hasPreview">
+                    <img :src="this.info.preview.source">
+                </div>
                 <div id="wiki-blurb" v-if="hasWikipediaExtracts">
                     <div v-html="this.info.wikipedia_extracts.html"></div>
                 </div>
                 <div v-else>
                     <p>Unfortunately, we couldn't find more info on this venue. Try using a search engine?</p>
                 </div>
-                <router-link :to="{name: 'Venue', params: {xid: this.venue.xid}}" ><button class="button is-small is-light">I wanna go to this location!</button></router-link>
+                <router-link :to="{name: 'Venue', params: {xid: this.venue.xid}}" ><button class="button is-light">I wanna go to this location!</button></router-link>
             </div>
             <div v-else>
                 <progress class="progress is-small is-primary" max="100"></progress>
@@ -42,6 +45,9 @@ export default {
       },
       hasWikipediaExtracts: function(){
           return 'wikipedia_extracts' in this.$root.$data.vuey.venue_detail[this.venue.xid]
+      },
+      hasPreview: function(){
+        return 'preview' in this.$root.$data.vuey.venue_detail[this.venue.xid]
       },
       info: function(){
           return this.$root.$data.vuey.venue_detail[this.venue.xid];
