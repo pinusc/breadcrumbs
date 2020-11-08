@@ -32,7 +32,8 @@ export default {
                     params: {
                         lat: this.user_lat,
                         lon: this.user_lon,
-                        radius: 5000
+                        radius: 5000,
+                        categories: this.$root.$data.vuey.category_preference
                     }
                 }
             );
@@ -47,6 +48,7 @@ export default {
     },
     created(){
         this.getLocations();
+        this.$root.$data.vuey.category_preference = this.$route.params.categoriesJoined;
     }
 
 }

@@ -40,7 +40,7 @@
           
       </div>
       <div id=next-page class="box has-background-link has-text-light has-text-centered">
-          <router-link class="has-text-light" to="/ChooseNextVenue">Show me what's around!</router-link>
+          <router-link class="has-text-light" :to="{name:'ChooseNextVenue', params:{categoriesJoined: this.categoriesJoin}}">Show me what's around!</router-link>
       </div>
   </div>
 </template>
@@ -56,6 +56,19 @@ export default {
             categoriesChecked: [false, false, false, false, false, false],
             categoryNames: ["Architecture", "Cultural", "Historic", "Industrial facilities", "Natural", "Religion", "Other"],
             maxWalkDistance: null
+        }
+    },
+    computed:{
+
+        categoriesJoin: function(){
+            var toJoin = [];
+            for(var i=0; i< this.categories.length; i++){
+                if(this.categoriesChecked[i]){
+                    toJoin.push(this.categories[i])
+                }
+
+            }
+            return toJoin.join(",");
         }
     }
 }

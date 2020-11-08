@@ -13,7 +13,8 @@ var store = {
         message: 'Hello!',
         userLocation: null,
         finalDestinationLocation: null,
-        venue_detail: {}
+        venue_detail: {},
+        category_preference: "interesting_places"
     }
 }
 
