@@ -1,15 +1,23 @@
 <template>
   <div class="home">
-      <section class="hero is-primary is-bold">
+      <section class="hero is-primary">
           <div class="hero-body">
-              <h1 class=title>Breadcrumbs</h1>
+            <div class="container">
+              <h1 class="title">
+        <h1>Where would you like to end your trip?</h1>
+              </h1>
+              <h2 class="subtitle">
+                Every explorer deserves a break...
+              </h2>
+            </div>
           </div>
-      </section>
+        </section>
 
       <section v-if="this.$root.$data.vuey.userLocation">
           <div class="box has-background-info has-text-centered">
-              <h1 class="subtitle has-text-light">Where would you like to end your trip at?</h1>
               <button class="button is-warning mb-4" @click="setTargetLocation('userLocation')">Where I am right now</button>
+              <span id="or">OR</span>
+              <hr />
               <Map v-bind:is-choosing-location=true />
                   <router-link to="Start" class="button is-warning mt-4">The map marker</router-link>
           </div>
@@ -48,6 +56,10 @@ export default {
 <style scoped lang=scss>
 .card {
     margin: 1em;
+}
+
+#or {
+  color: white;
 }
 
 #categories-list .box {
