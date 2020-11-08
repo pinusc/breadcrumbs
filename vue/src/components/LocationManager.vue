@@ -7,9 +7,9 @@
 </template>
 
 <script>
-function displayLocation(position) { 
+function displayLocation(that, position) { 
     var displayText = "Your latitude is " + position.coords.latitude + " and longitude is " + position.coords.longitude;
-    this.$root.$data.vuey.userLocation = {
+    that.$root.$data.vuey.userLocation = {
         "lat": position.coords.latitude,
         "lon": position.coords.longitude
     };
@@ -48,7 +48,7 @@ export default {
         queryLocation () { 
             //check if the geolocation object is supported, if so get position
             if (navigator.geolocation)
-                navigator.geolocation.getCurrentPosition(displayLocation, displayError);
+                navigator.geolocation.getCurrentPosition((pos) => {displayLocation(this, pos);}, displayError);
             else
                 document.getElementById("locationData").innerHTML = "Sorry - your browser doesn't support geolocation!";
         },
