@@ -42,7 +42,8 @@ const routes = [
     },
     {
         path: '/Final',
-        component: Final
+        component: Final,
+        name: 'Final'
     },
 ]
 

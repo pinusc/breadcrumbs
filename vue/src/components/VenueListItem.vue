@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <p v-on:click="toggleExpand">I'm a venue! {{venue.name}}</p>
+    <div class="box">
+        <p v-on:click="toggleExpand" v-bind:class="{active: expanded}">{{venue.name}}</p>
         <div v-if="expanded">
             <div v-if="dataLoaded">
                 <div id="wiki-blurb" v-if="hasWikipediaExtracts">
@@ -10,7 +10,10 @@
                 <div v-else>
                     <p>Unfortunately, we couldn't find more info on this venue. Try using a search engine?</p>
                 </div>
-                <router-link :to="{name: 'Venue', params: {xid: this.venue.xid}}" ><button>I wanna go to this location!</button></router-link>
+                <router-link :to="{name: 'Venue', params: {xid: this.venue.xid}}" ><button class="button is-small is-light">I wanna go to this location!</button></router-link>
+            </div>
+            <div v-else>
+                <progress class="progress is-small is-primary" max="100"></progress>
             </div>
         </div>
     </div>
@@ -74,5 +77,10 @@ export default {
 </script>
 
 <style scoped>
-
+.box{
+    margin:0;
+}
+.active{
+    font-weight: bold;
+}
 </style>
