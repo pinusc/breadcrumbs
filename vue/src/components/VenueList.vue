@@ -1,6 +1,6 @@
 <template>
     <div>
-        <VenueListItem v-for="venue in venues" v-bind:key="venue.name" v-bind:venue="venue" />
+        <VenueListItem v-for="venue in venues" v-bind:key="venue.xid" v-bind:venue="venue" />
         <p>hey</p>
     </div>
 </template>
@@ -15,7 +15,7 @@ export default {
     },
     data: function() {
         return{
-        venues:[{"name":"a"}]
+        venues:[{"name":"a","xid":"dummy"}]
         }
     },
     methods:{

@@ -23,6 +23,14 @@ def send_css(path):
     print(path)
     return send_from_directory('static/css', path)
 
+@app.route("/api/otm/detail")
+def api_venues_otm_detail():
+    xid = request.args.get("xid")
+
+    print(xid)
+    data = get_venue_details_from_OTM(xid)
+
+    return json.dumps(data)
     
 @app.route("/api/otm")
 def api_venues_otm():
@@ -41,6 +49,8 @@ def api_venues_otm():
     data = get_venues_from_OTM(lat,lon, radius, categories)
 
     return json.dumps(data)
+
+
 
 @app.route('/api/venues')
 def api_venues():
@@ -70,6 +80,22 @@ def get_venues_from_OTM(lat, lon, radius=3500, categories="interesting_places"):
         limit = 25
         )
     resp = requests.get(url=url, params=params)
+    data = json.loads(resp.text)
+    print(resp.text)
+
+    return data
+
+def get_venue_details_from_OTM(xid):
+    #https://api.opentripmap.com/0.1/en/places/xid/Q17550120?apikey=5ae2e3f221c38a28845f05b677a3c8a48be4b3462eb96b2ca683d48c
+    url = 'https://api.opentripmap.com/0.1/en/places/xid/' + xid
+    print(url)
+    print("\n")
+
+    params = dict(
+        apikey = "5ae2e3f221c38a28845f05b677a3c8a48be4b3462eb96b2ca683d48c"
+    )
+    resp = requests.get(url=url, params=params)
+    print(resp.url)
     data = json.loads(resp.text)
     print(resp.text)
 
