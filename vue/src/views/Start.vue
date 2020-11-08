@@ -5,33 +5,35 @@
               <h1 class=title>Breadcrumbs</h1>
           </div>
       </section>
-      <section>
-          <div class="box has-background-info">
-              <h1 class="subtitle has-text-light">What kind of places would you like to see?</h1>
-              <ul id=categories-list>
-                  <li v-for="i in categories.length" :key=i>
-                      <div class="box" >
-                          <label class="checkbox">
-                              <span class="checkbox__input">
-                                  <input type="checkbox" name="checked" checked v-model="categoriesChecked[i-1]">
-                                  <span class="checkbox__control">
-                                      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                                          <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                                  </span>
+      <div class="box has-background-info">
+          <h1 class="subtitle has-text-light">What kind of places would you like to see?</h1>
+          <ul id=categories-list>
+              <li v-for="i in categories.length" :key=i>
+                  <div class="box" >
+                      <label class="checkbox">
+                          <span class="checkbox__input">
+                              <input type="checkbox" name="checked" checked v-model="categoriesChecked[i-1]">
+                              <span class="checkbox__control">
+                                  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                      <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
                               </span>
-                              <span v-bind:class="{ 'has-text-weight-bold': categoriesChecked[i-1] }" class="radio__label">{{ categoryNames[i-1] }}</span>
-                          </label>
-                      </div>
-                  </li>
-              </ul>
-          </div>
-          <div class="card has-background-warning">
-              <div class="card-content">
-                  {{ categoriesChecked }}
-              </div>
-          </div>
-      </section>
-      <router-link to="/SelectDestination">Choose a destination</router-link>
+                          </span>
+                          <span v-bind:class="{ 'has-text-weight-bold': categoriesChecked[i-1] }" class="radio__label">{{ categoryNames[i-1] }}</span>
+                      </label>
+                  </div>
+              </li>
+          </ul>
+      </div>
+      <div id="walk-distance-box" class="box has-background-warning">
+          <h1 class="subtitle">How long would you like to walk?</h1>
+          <label>
+              <input type="number" v-model="maxWalkDistance" placeholder=1000>
+              <span>Km</span>
+          </label>
+      </div>
+      <div id=next-page class="box has-background-link has-text-light has-text-centered">
+          <router-link class="has-text-light" to="/SelectDestination">Show me what's around!</router-link>
+      </div>
   </div>
 </template>
 
@@ -44,7 +46,8 @@ export default {
         return {
             categories: ["architecture", "cultural", "historic", "industrial_facilities", "natural", "religion", "other"],
             categoriesChecked: [false, false, false, false, false, false],
-            categoryNames: ["Architecture", "Cultural", "Historic", "Industrial facilities", "Natural", "Religion", "Other"]
+            categoryNames: ["Architecture", "Cultural", "Historic", "Industrial facilities", "Natural", "Religion", "Other"],
+            maxWalkDistance: null
         }
     }
 }
@@ -55,8 +58,26 @@ export default {
     margin: 1em;
 }
 
+#app .box {
+    margin: 0.5em;
+}
+
 #categories-list .box {
     margin: 0.5em;
+}
+
+#walk-distance-box label {
+    font-size: 1.5rem;
+    input {
+        font-size: 1.5rem;
+    }
+    span {
+        margin-left: 0.5em;
+    }
+}
+
+#next-page {
+    font-size: 1.5rem;
 }
 
 .checkbox {
