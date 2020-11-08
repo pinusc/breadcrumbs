@@ -27,7 +27,9 @@ export default {
   data: function(){
       return {
           expanded: false,
-          dataLoaded: false
+          dataLoaded: false,
+          redIcon: this.$L.icon({iconUrl: '/static/img/marker-icon-red.png'}),
+          blueIcon: this.$L.icon({iconUrl: '/static/img/marker-icon.png'})
       }
   },
   
@@ -50,25 +52,27 @@ export default {
       async toggleExpand(){
           this.expanded = !this.expanded
           if(this.expanded){
-            if (this.venue.xid in this.$root.$data.vuey.venue_detail){
-                this.dataLoaded = true;
-            }
-            
-            if(! this.dataLoaded){
-                console.log("heys");
-                // make ajax request and load data
-                const { data } = await this.$http.get(
-                    '/api/otm/detail', {
-                        params: {
-                            xid: this.venue.xid
-                        }
-                    }
-                );
-                console.log(data);
-                this.dataLoaded = true;
-                this.$root.$data.vuey.venue_detail[this.venue.xid] = data;
+              this.venue.marker.setIcon(this.redIcon);
+              if (this.venue.xid in this.$root.$data.vuey.venue_detail){
+                  this.dataLoaded = true;
+              }
 
-            }
+              if(! this.dataLoaded){
+                  console.log("heys");
+                  // make ajax request and load data
+                  const { data } = await this.$http.get(
+                      '/api/otm/detail', {
+                          params: {
+                              xid: this.venue.xid
+                          }
+                      }
+                  );
+                  console.log(data);
+                  this.dataLoaded = true;
+                  this.$root.$data.vuey.venue_detail[this.venue.xid] = data;
+              }
+          } else {
+              this.venue.marker.setIcon(this.blueIcon);
           }
       },
       selectVenue(){
