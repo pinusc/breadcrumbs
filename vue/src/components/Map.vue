@@ -5,15 +5,29 @@
 <template>
   <div id="mapview">
   <button v-on:click="ajaxm"> Get Locations </button>
+  <VenueList ref="vlist"/>
   <h1>map</h1>
-    <p>{{ msg }}</p>
-    <div v-on:load="initmap" id="mapid"></div>
+  <p>{{ msg }}</p>
+  <div v-on:load="initmap" id="mapid"></div>
+
   </div>
+
 </template>
 
 <script>
+import VenueList from './VenueList.vue'
+//import Vue from 'vue'
+
 export default {
   name: 'Map',
+  data: function() {
+    return{
+      venues:[{"name":"a"}]
+    }
+  },
+  components: {
+    VenueList
+  },
   props: {
     msg: String,
   },
@@ -32,9 +46,9 @@ export default {
         var point = [data[i].point.lat, data[i].point.lon]
         console.log(point)
         this.$L.marker(point).addTo(this.mymap);
-      }
-      console.log(data);
-      // example response: { id: 1, name: "something" }
+
+        this.$refs.vlist.addVenue(data[i]);
+      }  
     }
   },
   mounted: function() {
