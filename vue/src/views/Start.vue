@@ -5,7 +5,7 @@
               <h1 class=title>Breadcrumbs</h1>
           </div>
       </section>
-      <div class="box has-background-info">
+      <div class="box has-background-info is-size-5">
           <h1 class="subtitle has-text-light">What kind of places would you like to see?</h1>
           <ul id=categories-list>
               <li v-for="i in categories.length" :key=i>
@@ -25,11 +25,19 @@
           </ul>
       </div>
       <div id="walk-distance-box" class="box has-background-warning">
-          <h1 class="subtitle">How long would you like to walk?</h1>
-          <label>
-              <input type="number" v-model="maxWalkDistance" placeholder=1000>
-              <span>Km</span>
-          </label>
+          
+          <h1 class="subtitle">How long would you like to walk? (meters)</h1>
+        <div class="columns">
+
+           <div class="column is-two-thirds">  
+                <input class="input" type="number" v-model="maxWalkDistance" value=1000>
+           </div>
+           <div class="column is-one-third">
+                <p>meters</p>
+           </div>
+
+        </div>
+          
       </div>
       <div id=next-page class="box has-background-link has-text-light has-text-centered">
           <router-link class="has-text-light" to="/ChooseNextVenue">Show me what's around!</router-link>
@@ -67,24 +75,15 @@ export default {
 }
 
 #walk-distance-box label {
-    font-size: 1.5rem;
-    input {
-        font-size: 1.5rem;
-    }
     span {
         margin-left: 0.5em;
     }
-}
-
-#next-page {
-    font-size: 1.5rem;
 }
 
 .checkbox {
     display: grid;
     grid-template-columns: min-content auto;
     grid-gap: 0.5em;
-    font-size: 1.5rem;
     color: var(--color);
 }
 
