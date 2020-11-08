@@ -1,5 +1,19 @@
 <template>
   <div class="home">
+
+    <section class="hero is-primary">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">
+        <h1>Where to <b>next?</b></h1>
+              </h1>
+              <h2 class="subtitle">
+                A little exploration goes a long way!
+              </h2>
+            </div>
+          </div>
+        </section>
+
       <Map ref="map"/>
       <VenueList ref="vlist"/>
   </div>
@@ -39,7 +53,9 @@ export default {
             );
             for (var i = 0; i < data.length; i++) {
                 var point = [data[i].point.lat, data[i].point.lon]
-                console.log(point)
+
+                
+
                 this.$L.marker(point).addTo(this.$refs.map.mymap);
 
                 this.$refs.vlist.addVenue(data[i]);

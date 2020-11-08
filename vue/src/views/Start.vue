@@ -39,9 +39,11 @@
         </div>
           
       </div>
-      <div id=next-page class="box has-background-link has-text-light has-text-centered">
-          <router-link class="has-text-light" :to="{name:'ChooseNextVenue'}">Show me what's around!</router-link>
-      </div>
+      <router-link class="has-text-light" :to="{name:'ChooseNextVenue'}">
+        <div id=next-page class="box has-background-link has-text-light has-text-centered">
+            Show me what's around!
+        </div>
+      </router-link>
   </div>
 </template>
 
@@ -52,9 +54,9 @@ export default {
     name: 'Start',
     data: function() {
         return {
-            categories: ["architecture", "cultural", "historic", "natural","industrial_facilities", "religion", "other"],
-            categoriesChecked: [false, false, true, true, false, false, false],
-            categoryNames: ["Architecture", "Cultural", "Historic", "Natural", "Industrial facilities", "Religion", "Other"],
+            categories: ["historic", "natural", "architecture", "cultural", "industrial_facilities", "religion", "other"],
+            categoriesChecked: [true, true, true, false, false, false, false],
+            categoryNames: ["Historic", "Natural", "Architecture", "Cultural", "Industrial facilities", "Religion", "Other"],
             maxWalkDistance: null
         }
     },
