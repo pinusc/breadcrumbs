@@ -42,23 +42,24 @@ export default {
     methods: {
         async getLocations () {
             const { data } = await this.$http.get(
-                'http://localhost:5000/api/otm', {
+                '/api/otm', {
                     params: {
                         lat: this.user_lat,
                         lon: this.user_lon,
-                        radius: 5000,
+                        radius: 50000,
                         categories: this.$root.$data.vuey.category_preference
                     }
                 }
             );
             for (var i = 0; i < data.length; i++) {
                 var point = [data[i].point.lat, data[i].point.lon]
+                console.log(point)
+                var marker = this.$L.marker(point);
+                marker.addTo(this.$refs.map.mymap);
 
-                
-
-                this.$L.marker(point).addTo(this.$refs.map.mymap);
-
-                this.$refs.vlist.addVenue(data[i]);
+                var venue = data[i];
+                venue.marker = marker;
+                this.$refs.vlist.addVenue(venue);
             }  
         }
     },
