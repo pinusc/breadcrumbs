@@ -1,7 +1,7 @@
 #export FLASK_DEBUG=1
 #env FLASK_APP=flask/main.py flask run
 
-from flask import Flask, escape, request, render_template, send_from_directory, send_static_file
+from flask import Flask, escape, request, render_template, send_from_directory
 from flask_cors import CORS, cross_origin
 import json, requests
 
