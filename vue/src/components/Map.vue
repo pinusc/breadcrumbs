@@ -63,7 +63,7 @@ function setUpLocationChooser(that, mymap) {
     userMarker.addTo(that.mymap);
     that.destination = {
         lat: that.user_lat,
-        lon: that.user_lng,
+        lon: that.user_lon,
         marker: userMarker
     }
     that.$root.$data.vuey.finalDestinationLocation = that.destination;

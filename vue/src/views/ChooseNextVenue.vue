@@ -114,6 +114,9 @@ export default {
                 var d_p2t = distance({"lat":data[i].point.lat, "lon":data[i].point.lon}, this.$root.$data.vuey.finalDestinationLocation);
                 //var d_u2t = distance(this.$root.$data.vuey.userCurrentLocation, this.$root.$data.vuey.finalDestinationLocation);
 
+                console.log(d_u2p)
+                console.log(d_p2t)
+
                 if (d_u2p + d_p2t < this.$root.$data.vuey.walkDistance * 0.95){
 
                     var venue = data[i];
