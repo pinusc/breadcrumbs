@@ -7,7 +7,6 @@
   <button v-on:click="ajaxm"> Get Locations </button>
   <VenueList ref="vlist"/>
   <div id="mapid"></div>
-
   </div>
 
 </template>
@@ -22,7 +21,8 @@ export default {
     return{
       venues:[{"name":"a"}],
       user_lat: Number,
-      user_lon: Number
+      user_lon: Number,
+      destination: {lat: null, lng: null, marker: null}
     }
   },
   components: {
@@ -50,6 +50,9 @@ export default {
 
         this.$refs.vlist.addVenue(data[i]);
       }  
+    },
+    mapClicked (e) {
+        console.log(e);
     }
   },
   mounted: function() {
@@ -71,6 +74,31 @@ export default {
         this.mymap = mymap;
         var userlocation = this.$L.circle([this.user_lat, this.user_lon], {radius: 50}).addTo(mymap);
         userlocation.setStyle({color: "#FF0000"});
+
+
+        var userMarker = this.$L.marker({lat:this.user_lat, lng:this.user_lon});
+        userMarker.addTo(this.mymap);
+        this.destination = {
+            lat: this.user_lat,
+            lng: this.user_lng,
+            marker: userMarker
+        }
+
+        var that = this;
+        mymap.on('click', function(e) {
+            console.log(e.latlng);
+            if (that.lastClicked.marker) {
+                that.lastClicked.marker.removeFrom(that.mymap);
+            }
+
+            var marker = that.$L.marker(e.latlng);
+            marker.addTo(that.mymap);
+            that.lastClicked = {
+                lat: e.latlng.lat,
+                lng: e.latlng.lng,
+                marker
+            }
+        });
     })
 
   }
