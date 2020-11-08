@@ -1,9 +1,7 @@
 <template>
   <div class="home">
-      <router-link to="/Venue">Go to this venue</router-link>
-      <VenueList ref="vlist"/>
-      <button v-on:click="getLocations"> Get Locations </button>
       <Map ref="map"/>
+      <VenueList ref="vlist"/>
   </div>
 </template>
 
@@ -46,6 +44,9 @@ export default {
                 this.$refs.vlist.addVenue(data[i]);
             }  
         }
+    },
+    created(){
+        this.getLocations();
     }
 
 }

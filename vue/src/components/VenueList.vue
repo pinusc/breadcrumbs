@@ -1,7 +1,6 @@
 <template>
     <div>
         <VenueListItem v-for="venue in venues" v-bind:key="venue.xid" v-bind:venue="venue" />
-        <p>hey</p>
     </div>
 </template>
 
